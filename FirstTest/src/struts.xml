@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="false"/>
+    <package name="default" namespace="/" extends="struts-default">
+        <!--Interceptor start-->
+        <interceptors>
+            <interceptor name="urlPrinter" class="com.example.interceptor.PrintUrlInterceptor"/>
+            <interceptor-stack name="interceptorStack">
+                <interceptor-ref name="urlPrinter"/>
+
+            </interceptor-stack>
+        </interceptors>
+        <!--Interceptor End-->
+
+
+        <action name="login" class="com.example.action.LoginAction" method="showLogin">
+            <result name="success">/common/login.jsp</result>
+        </action>
+
+        <action name="logOut" class="com.example.action.LoginAction" method="logOut">
+            <interceptor-ref name="interceptorStack"/>
+            <result type="redirect">login.action</result>
+        </action>
+
+        <action name="productList" class="com.example.action.LoginAction" method="productList">
+            <result name="success">/pages/jsp/product.jsp</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="wellcome" class="com.example.action.LoginAction" method="wellCome">
+            <result type="redirect">productList.action</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="saveProduct" class="com.example.action.ProductAction" method="saveProduct">
+            <result type="redirectAction">productList.action</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="updateProduct" class="com.example.action.ProductAction" method="updateProduct">
+            <result type="redirectAction">productList.action</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+
+        <action name="product" class="com.example.action.ProductAction" method="mainMenu">
+            <result name="success">/pages/jsp/product.jsp</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+<!--
+        <action name="productbill" class="com.example.action.ProductAction" method="mainMenu">
+            <result name="success">/pages/jsp/bill.jsp</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>-->
+
+
+        <action name="orderdetail" class="com.example.action.ProductAction" method="mainMenu">
+            <result name="success">/pages/jsp/orderdetail.jsp</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="deleteproduct" class="com.example.action.ProductAction" method="deleteProduct">
+            <result type="redirectAction" name="success">deleteproductList.action</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="deleteproductList" class="com.example.action.LoginAction" method="productList">
+            <result name="success">/pages/jsp/product.jsp?actiontype=delete</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+
+        <!--Product Detail Mappping start-->
+
+        <action name="productDetailList" class="com.example.action.ProductDetailAction" method="productDetailList">
+            <result name="success">/pages/jsp/productdetail.jsp</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="saveProductDetail" class="com.example.action.ProductDetailAction" method="saveProductDetail">
+            <result name="success" type="redirectAction">productDetailList.action</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="updateProductDetail" class="com.example.action.ProductDetailAction" method="updateProductDetail">
+            <result type="redirectAction">productDetailList.action</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+
+        <action name="deleteproductdetail" class="com.example.action.ProductDetailAction" method="deleteProductDetail">
+            <result type="redirectAction" name="success">deleteproductDetailList.action</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="deleteproductDetailList" class="com.example.action.ProductDetailAction"
+                method="productDetailList">
+            <result name="success">/pages/jsp/productdetail.jsp?actiontype=delete</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <!--Product Detail Mappping End-->
+
+        <!--Product Deal Mapping Start-->
+
+        <action name="productdeal" class="com.example.action.ProductDealAction" method="productDealDetail">
+            <result name="success">/pages/jsp/productdeal.jsp</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <action name="saveproductdeal" class="com.example.action.ProductDealAction" method="saveProductDeal">
+            <result type="redirectAction" name="success">productdeal.action</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <!--Product Deal Mapping End-->
+
+        <!--Product Bill Mapping Start-->
+
+
+        <action name="productbill" class="com.example.action.BillAction" method="productDealDetail">
+            <result name="success">/pages/jsp/bill.jsp</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <!--Product Bill Mapping End-->
+
+    </package>
+
+</struts>

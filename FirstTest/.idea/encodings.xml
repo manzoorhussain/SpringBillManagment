@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/classes/config/database/properties/database.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/common/header.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/common/include.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/common/login.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/common/notification.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/js/login.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/pages/jsp/bill.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/pages/jsp/orderdetail.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/pages/jsp/product.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/pages/jsp/productdeal.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/pages/jsp/productdetail.jsp" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.example.bean.ProductDealModel" table="product_deal">
+
+    <id name="dealId" type="java.lang.String" column="deal_id">
+      <generator class="assigned"/>
+    </id>
+
+
+    <property name="dealName" type="string" column="deal_name" not-null="true"/>
+    <property name="dealTitle" type="string" column="deal_title" not-null="true"/>
+    <property name="dealPrice" type="string" column="deal_price"/>
+    <property name="dealValue" type="string" column="deal_value"/>
+    <property name="createdDate" type="java.util.Date" column="created_date"/>
+    <property name="createdBy" type="string" column="created_by"/>
+    <property name="modifiedDate" type="java.util.Date" column="modified_date"/>
+    <property name="modifiedBy" type="string" column="modified_by"/>
+    <property name="status" type="string" column="deal_status"/>
+
+
+  </class>
+</hibernate-mapping>

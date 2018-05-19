@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+  <bean id="customerAction" class="com.example.action.CustomerAction">
+    <property name="customerBusniess" ref="customerBusniess"/>
+  </bean>
+
+  <bean id="customerBusniess" class="com.example.BusinessImpl.CustomerBusniessImpl">
+    <property name="customerDAO" ref="customerDAO"/>
+  </bean>
+
+  <bean id="customerDAO" class="com.example.DAOImpl.CustomerDAOImpl">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+
+
+  <bean id="productAction" class="com.example.action.ProductAction">
+    <property name="productBusniess" ref="productBusniess"/>
+  </bean>
+
+  <bean id="productBusniess" class="com.example.BusinessImpl.ProductBusniessImpl">
+    <property name="productDAO" ref="productDAO"/>
+  </bean>
+
+  <bean id="productDAO" class="com.example.DAOImpl.ProductDAOImpl">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+
+  <!--Product Detail Bean Start-->
+
+
+  <bean id="productDetailAction" class="com.example.action.ProductDetailAction">
+    <property name="productDetailBusniess" ref="productDetailBusniess"/>
+  </bean>
+
+  <bean id="productDetailBusniess" class="com.example.BusinessImpl.ProductDetailBusniessImpl">
+    <property name="productDetailDAO" ref="productDetailDAO"/>
+  </bean>
+
+  <bean id="productDetailDAO" class="com.example.DAOImpl.ProductDetailDAOImpl">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+
+
+  <!--Product Detail Bean End-->
+
+
+  <!--ProductDeal Bean Start-->
+
+  <bean id="productDealAction" class="com.example.action.ProductDealAction">
+    <property name="productDealBusniess" ref="productDealBusniess"/>
+  </bean>
+
+
+  <bean id="productDealBusniess" class="com.example.BusinessImpl.ProductDealBusniessImpl">
+    <property name="productDealDAO" ref="productDealDAO"/>
+  </bean>
+
+  <bean id="productDealDAO" class="com.example.DAOImpl.ProductDealDAOImpl">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <!--ProductDeal Bean End-->
+
+  <!--ProductBill Bean start-->
+  <bean id="billAction" class="com.example.action.BillAction">
+    <property name="productBillBusniess" ref="productBillBusniess"/>
+  </bean>
+
+
+  <bean id="productBillBusniess" class="com.example.BusinessImpl.ProductBillBusniessImpl">
+    <property name="productBillDAO" ref="productBillDAO"/>
+  </bean>
+
+  <bean id="productBillDAO" class="com.example.DAOImpl.ProductBillDAOImpl">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <!--ProductBill Bean End-->
+</beans>
