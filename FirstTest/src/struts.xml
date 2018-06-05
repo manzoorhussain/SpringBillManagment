@@ -123,10 +123,11 @@
         <!--Product Bill Mapping Start-->
 
 
-        <action name="productbill" class="com.example.action.BillAction" method="productDealDetail">
+        <action name="productbill" class="com.example.action.BillAction" method="productDetailForBill">
             <result name="success">/pages/jsp/bill.jsp</result>
             <result name="error">/pages/AccessDenied.jsp</result>
         </action>
+
 
         <!--Product Bill Mapping End-->
 

@@ -116,6 +116,34 @@
     console.log(deal);
     $('#productdealValue').val(deal);
   }
+
+  function ajaxSubmit(action, formId, actiontype) {
+
+    $("#" + formId).submit(function (e) {
+
+      var postData = $(this).serializeArray();
+      var formURL = action
+
+      $.ajax(
+        {
+          url: formURL,
+          type: 'POST',
+          data: postData,
+          success: function () {
+            window.location = "productdeal.action?actiontype=" + actiontype;
+          },
+          error: function () {
+
+          }
+        }
+      );
+
+      e.preventDefault(); //STOP default action
+      // e.unbind();
+
+    });
+    $("#" + formId).submit();
+  }
 </script>
 <body>
 
@@ -124,7 +152,7 @@
 <c:set var="productDetail" value="${productDetailMap}"/>
 
 <div>
-  <form action='/saveproductdeal.action' name="productdeal" id="productdeal" method="post" class="productdeal">
+  <form  name="productdeal" id="productdeal" method="post" class="productdeal">
     <label for="peroductdealId">Deal Id</label>
     <input type="text" id="peroductdealId" name="peroductdealId" placeholder="Deal Id">
 
@@ -201,7 +229,8 @@
 
     <div style="width: 100%">
       <input type="button" value="CreateDeal" onclick="createDeal()"/>&nbsp;
-      <input type="submit" value="Save"/>
+      <%--<input type="submit" value="Save"/>--%>
+      <input type="button" value="Save" onclick="ajaxSubmit('/saveproductdeal.action','productdeal','save')" class="button">
     </div>
   </form>
 </div>

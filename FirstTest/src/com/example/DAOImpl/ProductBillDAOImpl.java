@@ -1,6 +1,8 @@
 package com.example.DAOImpl;
 
 import com.example.DAO.ProductBillDAO;
+import com.example.DAO.ProductDealDAO;
+import com.example.bean.ProductDealModel;
 import com.example.bean.ProductModel;
 import com.example.dto.ProductDetailDTO;
 import org.hibernate.SQLQuery;
@@ -16,7 +18,7 @@ import java.util.Map;
 /**
  * Created by Folio 9480 on 5/12/2018.
  */
-public class ProductBillDAOImpl extends HibernateDaoSupport implements ProductBillDAO{
+public class ProductBillDAOImpl extends HibernateDaoSupport implements ProductBillDAO {
 
     @Override
     public Map<String, List<ProductDetailDTO>> getProductDealHashMap() throws Exception {
@@ -73,4 +75,14 @@ public class ProductBillDAOImpl extends HibernateDaoSupport implements ProductBi
 
 
     }
+
+    @Override
+    public List<ProductDealModel> getAllProductDeal() throws Exception {
+        StringBuffer query = new StringBuffer("from ProductDealModel Order by dealId desc");
+        ArrayList<ProductDealModel> productDealModelList = (ArrayList<ProductDealModel>) getHibernateTemplate().find(query.toString());
+        return productDealModelList;
+
+    }
+
+
 }

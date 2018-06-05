@@ -2,10 +2,8 @@ package com.example.Busniess;
 
 import com.example.DAO.ProductDAO;
 import com.example.bean.ProductDealModel;
-import com.example.bean.ProductDetailModel;
 import com.example.dto.ProductDetailDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

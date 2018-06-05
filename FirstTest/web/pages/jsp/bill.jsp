@@ -86,6 +86,7 @@
     cursor: pointer;
   }
 
+
 </style>
 <script>
   var dealArray = new Array();
@@ -120,8 +121,9 @@
 <body>
 
 <h2>Bill</h2>
-<jsp:useBean id="dealAction" class="com.example.action.ProductDealAction"/>
+<jsp:useBean id="dealAction" class="com.example.action.BillAction"/>
 <c:set var="productDetail" value="${productDetailMap}"/>
+<c:set var="productDealModelList" value="${productDealModelList}"/>
 
 <div>
   <form action='/saveproductdeal.action' name="productdeal" id="productdeal" method="post" class="productdeal">
@@ -153,14 +155,16 @@
               <p class="card-text" style="height: auto">
                 <c:forEach var="dealListNameList" varStatus="dealListCounter" items="${dealListValue}">
               <table id="dealtable">
-
                 <tr>
                   <td>
-                    <input type="checkbox" name="dealItem" id="${dealListKey}_${dealListCounter.index}" onclick="addDealValue(this);">
-                    <input type="hidden" name="productPrice" id="PRODUCTPRICE_${dealListKey}_${dealListCounter.index}" value="${dealListNameList.productDetailprice}"/>
+                    <input type="checkbox" name="dealItem" id="${dealListKey}_${dealListCounter.index}"
+                           onclick="addDealValue(this);">
+                    <input type="hidden" name="productPrice" id="PRODUCTPRICE_${dealListKey}_${dealListCounter.index}"
+                           value="${dealListNameList.productDetailprice}"/>
                   </td>
                   <td id="TEXT_${dealListKey}_${dealListCounter.index}">${dealListNameList.productDetailName}</td>
-                  <td><input type="text" name="dealItemValue" id="NOOFITEM_${dealListKey}_${dealListCounter.index}" value=""
+                  <td><input type="text" name="dealItemValue" id="NOOFITEM_${dealListKey}_${dealListCounter.index}"
+                             value=""
                              style="height: 13px;width: 50px">
 
                   </td>
@@ -178,11 +182,56 @@
       </c:forEach>
 
     </div>
+
+
+    <!--DEAL LIST START-->
+    <div class="row">
+
+      <table border="2" id="dealTable" width="100%">
+        <tr>
+          <th>select</th>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Value</th>
+        </tr>
+        <c:forEach var="productDealList" items="${productDealModelList}" varStatus="productDealCounter">
+          <c:set value="${fn:split(productDealList.dealValue,'~')}" var="dealValues"/>
+          <tr>
+            <td><input type="checkbox" name="deal"></td>
+            <td>${productDealList.dealId}</td>
+            <td>${productDealList.dealName}</td>
+            <td>${productDealList.dealTitle}</td>
+            <td>${productDealList.dealPrice}</td>
+              <%--  <td>${productDealList.dealValue}</td>--%>
+            <td>
+              <table>
+                <tr>
+                  <c:forEach var="dealValuesList" items="${dealValues}">
+                    <td>
+                        ${dealValuesList}
+                    </td>
+
+
+                  </c:forEach>
+                </tr>
+              </table>
+
+            </td>
+
+          </tr>
+        </c:forEach>
+      </table>
+
+    </div>
+    <!--DEAL LIST END-->
     <!--End Row-->
 
     <!--End container-->
-    <input type="hidden" name="productdealValue"  id="productdealValue"/>
+    <input type="hidden" name="productdealValue" id="productdealValue"/>
     <input type="hidden" name="userName" value="${sessionScope.userName}"/>
+
     <div style="width: 100%">
       <input type="button" value="Generate Bill" onclick="createDeal()"/>&nbsp;
 

@@ -2,6 +2,7 @@ package com.example.BusinessImpl;
 
 import com.example.Busniess.ProductBillBusniess;
 import com.example.DAO.ProductBillDAO;
+import com.example.bean.ProductDealModel;
 import com.example.dto.ProductDetailDTO;
 
 import java.util.List;
@@ -26,5 +27,10 @@ public class ProductBillBusniessImpl implements ProductBillBusniess {
     @Override
     public Map<String, List<ProductDetailDTO>> getProductDealHashMap()   throws Exception {
         return productBillDAO.getProductDealHashMap();
+    }
+
+    @Override
+    public List<ProductDealModel> getAllProductDeal() throws Exception {
+        return productBillDAO.getAllProductDeal();
     }
 }

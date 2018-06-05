@@ -26,4 +26,5 @@ public interface ProductDealDAO {
     public Map<String, List<ProductDetailDTO>> getProductDealHashMap()throws Exception;
 
 
+
 }
