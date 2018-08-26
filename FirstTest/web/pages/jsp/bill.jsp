@@ -1,6 +1,7 @@
 <html>
 <body>
 <%@include file="/common/header.jsp" %>
+<%@include file="/common/open-model.jsp"%>
 <style>
   input[type=text], select {
     width: 20%;
@@ -89,33 +90,42 @@
 
 </style>
 <script>
-  var dealArray = new Array();
+  var dealArray = [];
   function addDealValue(obj) {
 
     var currentItemId = obj.id;
     var currentTextId = 'TEXT_' + currentItemId;
     var currentNoOfItem = 'NOOFITEM_' + currentItemId;
+    var currentProductPrice = 'PRODUCTPRICE_' + currentItemId;
     var currentText = $("#" + currentTextId).text();
     var currentNoOfItemText = $("#" + currentNoOfItem).val();
+    var currentProductPriceText= $("#" + currentProductPrice).val();
 
     if (currentNoOfItemText == '') {
       currentNoOfItemText = 1;
     }
 
-    var dealDone = currentText + currentNoOfItemText;
+   //var dealDone = currentText + currentNoOfItemText+currentProductPriceText;
+    var dealDone = "{"+"nameofitem:"+currentText+","+"noofitem:"+currentNoOfItemText+","+"priceofitem:"+currentProductPriceText+"}";
     var len = dealArray.length;
     dealArray[len] = dealDone;
   }
 
-  function createDeal() {
-    var deal = '';
+  function showBillModel(){
+alert(dealArray);
+   // $('#productdealValue').val(deal);
+    //window.location = "billmodel.action?showBillModel=true&bill="+dealArray;
 
-    for (var v = 0; v < dealArray.length; v++) {
-      deal += dealArray[v] + "~";
-
-    }
-    console.log(deal);
-    $('#productdealValue').val(deal);
+    $.ajax({
+      url: 'billmodel.action?showBillModel=true',
+      type: 'POST',
+      data: JSON.stringify(dealArray),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function(response) {
+        alert(response);
+      }
+    });
   }
 </script>
 <body>
@@ -194,26 +204,26 @@
           <th>Name</th>
           <th>Title</th>
           <th>Price</th>
-          <th>Value</th>
+          <th>Item</th>
         </tr>
         <c:forEach var="productDealList" items="${productDealModelList}" varStatus="productDealCounter">
           <c:set value="${fn:split(productDealList.dealValue,'~')}" var="dealValues"/>
           <tr>
-            <td><input type="checkbox" name="deal"></td>
-            <td>${productDealList.dealId}</td>
-            <td>${productDealList.dealName}</td>
-            <td>${productDealList.dealTitle}</td>
-            <td>${productDealList.dealPrice}</td>
-              <%--  <td>${productDealList.dealValue}</td>--%>
+            <td>
+              <input type="checkbox" name="deal" id="deal_${productDealCounter.index}">
+              <input type="hidden" name="dealPrice" id="DEALPRICE_${productDealCounter.index}" value="${productDealList.dealPrice}"/>
+            </td>
+            <td id="dealId_${productDealCounter.index}">${productDealList.dealId}</td>
+            <td id="dealName_${productDealCounter.index}">${productDealList.dealName}</td>
+            <td id="dealTitle_${productDealCounter.index}">${productDealList.dealTitle}</td>
+            <td id="dealPrice_${productDealCounter.index}">${productDealList.dealPrice}</td>
             <td>
               <table>
                 <tr>
                   <c:forEach var="dealValuesList" items="${dealValues}">
-                    <td>
+                    <td id="dealItem_"${productDealCounter.index}>
                         ${dealValuesList}
                     </td>
-
-
                   </c:forEach>
                 </tr>
               </table>
@@ -233,12 +243,14 @@
     <input type="hidden" name="userName" value="${sessionScope.userName}"/>
 
     <div style="width: 100%">
-      <input type="button" value="Generate Bill" onclick="createDeal()"/>&nbsp;
+      <%--<input type="button" value="Generate Bill" onclick="generatBill()"/>&nbsp;---%>
+    <input type="button" value="Generate Bill" onclick="showBillModel()"/>
+      <%--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>--%>
 
     </div>
   </form>
 </div>
-<!--This is Testing Comments-->
+
 </body>
 <html>
 <body>

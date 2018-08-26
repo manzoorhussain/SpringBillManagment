@@ -5,6 +5,11 @@
 
 <struts>
     <constant name="struts.devMode" value="false"/>
+    <constant name="struts.freemarker.templatesCache" value="true"/>
+    <constant name="struts.xslt.nocache" value="false"/>
+    <constant name="struts.ognl.logMissingProperties"  value="=false"/>
+    <constant name="struts.ognl.enableExpressionCache" value="true"/>
+
     <package name="default" namespace="/" extends="struts-default">
         <!--Interceptor start-->
         <interceptors>
@@ -130,6 +135,14 @@
 
 
         <!--Product Bill Mapping End-->
+
+        <!--Bill Model Start-->
+        <action name="billmodel" class="com.example.action.BillAction" method="showBillModel">
+            <result name="success">/common/open-model.jsp</result>
+            <result name="error">/pages/AccessDenied.jsp</result>
+        </action>
+
+        <!--Bill Model  End-->
 
     </package>
 
